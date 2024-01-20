@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+.img{
+    width: 75%;
+    float: left;
+    margin: 0 auto;
+    vertical-align: middle;
+}
+.mb-2 {
+    margin-bottom: 19.5rem!important;
+}
+.my-4 {
+    margin-top: 3.5rem!important;
+    margin-bottom: 6.5rem!important;
+}

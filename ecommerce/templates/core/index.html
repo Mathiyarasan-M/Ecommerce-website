@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+{%load static %}
+{% load cart_template_tag %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Striker's Choice</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <link href="{% static 'img/LOGO1.png'%}" rel="icon">
+  <link href="{% static 'img/apple-touch-icon.png'%}" rel="apple-touch-icon">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+  <link href="{%static 'vendor/aos/aos.css'%}" rel="stylesheet">
+  <link href="{%static 'vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+  <link href="{%static 'vendor/bootstrap-icons/bootstrap-icons.css'%}" rel="stylesheet">
+  <link href="{%static 'vendor/boxicons/css/boxicons.min.css'%}" rel="stylesheet">
+  <link href="{%static '/vendor/glightbox/css/glightbox.min.css'%}" rel="stylesheet">
+  <link href="{%static '/vendor/remixicon/remixicon.css'%}" rel="stylesheet">
+  <link href="{%static '/vendor/swiper/swiper-bundle.min.css'%}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="{% static 'css/style.css'%}" rel="stylesheet">
+
+</head>
+
+<body>
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container">
+      <div class="header-container d-flex align-items-center justify-content-between">
+        <div class="logo">
+          <h1 class="text-light"><a href="index.html"><span>Striker's Choice</span></a></h1>
+ 
+          <a href="index.html"><img src="{% static 'img/logo.png'%}" alt="" class="img-fluid"></a>
+        </div>
+
+        <nav id="navbar" class="navbar">
+          <ul>
+
+            <li><a class="nav-link scrollto active " href="#hero">🏠Home</a></li>
+
+
+            {% if user.is_authenticated %}
+            <li><a class="nav-link scrollto active" href="{% url 'orderlist' %}">🛒Cart&nbsp;&nbsp;
+                <div style="color: red;">{{request.user | cart_item_count}}</div>
+              </a></li>
+            <li><a class="nav-link scrollto active" href="#hero">👤{{user.username}}</a></li>
+            <li><a class="getstarted scrollto" href="{% url 'user_logout' %}">Logout</a></li>
+            {% else %}
+            <li><a class="getstarted scrollto" href="{% url 'user_login' %}">Login</a></li>
+            <li><a class="getstarted scrollto" href="{% url 'user_register'%}">Register</a></li>
+            {% endif %}
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+
+      </div>
+    </div>
+  </header>
+
+  <section id="hero" class="d-flex align-items-center">
+    <div class="container text-center position-relative" data-aos="fade-in" data-aos-delay="200">
+      <h1>Power Your Passion: The Ultimate Sports Gear Destination</h1>
+      <h2>Explore a World of Performance and Style,Quality Gear for Every Sport and Passion</h2>
+      <a href="#about" class="btn-get-started scrollto">WELCOME</a>
+    </div>
+  </section>
+
+  <main id="main">
+
+      <section class="bg-light py-4 my-5">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-12 ">
+            <h4 class="mb-3">COLLECTIONS</h4>
+            <hr style="border-color: #b8bfc2;">
+          </div>
+          {% for product in products %}
+          <div class="col-md-4 col-lg-3">
+            <div class="card h-100 fixed">
+              <img src="{{product.img.url}}" class="card-image-top mx-auto d-block  " class="card-img-top" alt=" load ">
+              <div class="card-body ">
+                <a href="{% url 'product_desc' product.pk %}">
+                  <h5 class="card-title text-primary">{{product.name}}</h5>
+                </a>
+                <hr>
+                <p class="card-text">
+                  <span class="float-start old_price"><s>Rs.{{product.original_price | stringformat:'d'}}</s></span>
+                  <span class="float-end new_price">Rs.{{product.selling_price | stringformat:'d'}}</span>
+                </p>
+              </div>
+
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  
+
+
+  </main>
+
+  {% include 'core/footer.html'%}
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+  <script src="{% static 'vendor/purecounter/purecounter_vanilla.js'%}"></script>
+  <script src="{% static 'vendor/aos/aos.js'%}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+  <script src="{% static 'vendor/glightbox/js/glightbox.min.js'%}"></script>
+  <script src="{% static 'vendor/isotope-layout/isotope.pkgd.min.js'%}"></script>
+  <script src="{% static 'vendor/swiper/swiper-bundle.min.js'%}"></script>
+  <script src="{% static 'vendor/php-email-form/validate.js'%}"></script>
+  <script src="{% static 'js/main.js'%}"></script>
+
+</body>
+
+</html>

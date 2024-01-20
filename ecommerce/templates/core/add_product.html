@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+{%load static %}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="{%static 'vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+    <link href="{% static 'css/style3.css'%}" rel="stylesheet">
+
+    <title>Add Products</title>
+
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <div class="container main">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6 side-image">
+                       <img src="{% static 'img/logo.png'%}" alt="">
+                        <div class="text">
+                            <p>Sports Product Available<i>-Mathicricket17</i></p>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6 right">
+
+                        <div class="input-box">
+
+                            <header>Add Product</header>
+                            {% if messages %}
+                            {% for message in messages %}
+                            <header class="" style="color: red;">{{message}}</header>
+                            {% endfor %}
+                            {% endif%}
+                            <form method="POST" action="{% url 'add_product' %}">
+                                {% csrf_token %}
+                                {% for field in form.visible_fields %}
+                                <div class="form-group">
+                                    {{field.label_tag }}
+                                    {{field}}
+                                </div>
+                                {% endfor %}
+
+                                <div class="input-field">
+
+                                    <input name="add_product" id="add_product" type="submit" class="submit"
+                                        value="{{add_product}}">
+                                </div>
+                            </form>
+
+
+                        </div>
+                    </div>
+                </div>
+        </div>
+        </form>
+    </div>
+    </div>
+</body>
+
+</html>
